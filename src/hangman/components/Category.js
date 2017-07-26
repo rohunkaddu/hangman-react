@@ -26,6 +26,7 @@ export class Category extends Component {
         word += "_ "
       }
     }
+
     console.log(word);
 
     this.state = {
