@@ -49,3 +49,8 @@ body {
   margin-right: 33.3%;
   font-size: 200px;
 }
+
+#logout {
+  padding-left: 90%;
+  padding-top: 1%;
+}
