@@ -48,14 +48,34 @@ body {
   margin-top: 2%;
 }
 
-.congratsbox {
-  border: solid black 3px;
-  margin-left: 33.3%;
-  margin-right: 33.3%;
-  font-size: 200px;
-}
-
 #logout {
   padding-left: 90%;
   padding-top: 1%;
+}
+
+.holder {
+  border-radius: 5px;
+	padding: 20px;
+  margin-left: 33%;
+  margin-right: 33%;
+  text-align: center;
+}
+
+.input {
+  width: 40%;
+  height: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.button {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.header {
+  float: left;
 }

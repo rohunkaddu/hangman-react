@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Category } from './Category';
 import { AppHeader } from './Header';
+import './style.css';
 
 export class TwoPlayer extends Component {
   state = {
@@ -21,18 +22,20 @@ export class TwoPlayer extends Component {
 
   render() {
     const { newWord } = this.state;
-    <AppHeader />
     if (this.state.clicked) {
       return (
-        <div>
+        <div className="holder">
+          <h1 className="header">Type a word while the other player looks away.</h1>
           <input
             onChange={this.onItemChange}
             value={newWord}
+            placeholder="Type a word..."
+            className="input"
           />
-        <button onClick={this.handleClick}>=></button>
+        <button onClick={this.handleClick} className="button">=></button>
         </div>
       );
     }
-    return <Category name="Two Player" wordList={[{ newWord }]} />
+    return <Category name="Two Player" wordList={[newWord]} />
   }
 }
