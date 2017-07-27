@@ -129,14 +129,17 @@ getTitle = () => {
         <div>
           <h1 id="line" style={{whiteSpace: "pre", fontSize: 80}}>{this.state.currentDisplayedWord}</h1>
         </div>
-        <button onClick={this.handleClick}>Solution</button>
+        <button className="gameButtons" onClick={this.handleClick}>Solution</button>
+        <a href="http://localhost:3001/categories?numOfPlayers=1button"><button className="gameButtons">New Category</button></a>
         <button
+          className="gameButtons"
           onClick={this.newGame}
         >
           New Game
         </button>
+
         <h1>{this.state.clicked ? this.state.currentWord : null}</h1>
-        <h1 style={{fontSize:100}}>{ this.state.errors === 7 ? 'You lost. Try again?' : null }</h1>
+        <h1 id="answer" style={{fontSize:100}}>{ this.state.errors === 7 ? 'You lost. Try again?' : null }</h1>
         <Win currentWord={this.state.currentDisplayedWord} />
       </div>
     );
