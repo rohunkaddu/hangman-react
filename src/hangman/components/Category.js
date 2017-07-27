@@ -117,6 +117,7 @@ export class Category extends Component {
         <h1 id="line" style={{whiteSpace: "pre", fontSize: 80}}>{this.state.currentDisplayedWord}</h1>
       </div>
       <button onClick={this.handleClick}>Solution</button>
+      <a href="http://localhost:3001/categories?numOfPlayers=1"><button>New Category</button></a>
       <h1>{this.state.clicked ? this.props.wordList[this.randindex] : null}</h1>
       </div>
     );
