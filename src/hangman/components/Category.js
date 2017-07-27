@@ -6,65 +6,18 @@ import { letterList } from '../utils/strings';
 import { replaceAt, upperCaseFirstLetter } from '../utils/strings'
 
 
+function getRandomIndex(length) {
+  return Math.floor(Math.random() * length);
+}
+
 export class Category extends Component {
-  constructor(props) {
-    super(props);
 
-    this.randindex = Math.floor(Math.random() * props.wordList.length);
-    this.updateCurrentWord = this.updateCurrentWord.bind(this);
-    this.updateCurrentDisplayedWord = this.updateCurrentDisplayedWord.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleWrong = this.handleWrong.bind(this);
-
-    var word = ""
-    let wordList = props.wordList
-    let currentWord = wordList[this.randindex]
-    for (var i = 0; i < wordList[this.randindex].length; i++) {
-      if (wordList[this.randindex].charAt(i) === ' ') {
-        word += "  "
-      } else {
-        word += "_ "
-      }
-    }
-
-    console.log(word);
-
-    this.state = {
-      clicked: false,
-      errors: 0,
-      currentWord: currentWord,
-      currentDisplayedWord: word
-    };
+  componentWillMount() {
+    this.newGame();
   }
 
-  updateCurrentWord(newWord) {
-    this.setState({
-      currentWord: newWord
-    })
-  }
 
-  updateCurrentDisplayedWord(newWord) {
-    this.setState({
-      currentDisplayedWord: newWord
-    })
-  }
-
-  handleClick() {
-    this.setState({
-      clicked: true,
-      errors: 7,
-    });
-  }
-
-  handleWrong(type) {
-    this.setState({
-      errors: type === 'add' ? this.state.errors + 1 : this.state.errors,
-    });
-  }
-
-  debug = false
-
-  componentDidMount = () => {
+  componentDidMount() {
     let self = this
     for (let i = 0; i < letterList.length; i++) {
        let div = document.getElementsByClassName('letterButtons')[i]
@@ -97,6 +50,67 @@ export class Category extends Component {
      }
   }
 
+  newGame = () => {
+    var word = ""
+    let currentWord = this.props.wordList[getRandomIndex(this.props.wordList.length)]
+    for (var i = 0; i < currentWord.length; i++) {
+      if (currentWord.charAt(i) === ' ') {
+        word += "  "
+      } else {
+        word += "_ "
+      }
+    }
+    console.log(word);
+    this.setState({
+      clicked: false,
+      errors: 0,
+      guesses: [],
+      over: false,
+      won: false,
+      currentWord,
+      currentDisplayedWord: word,
+    });
+  }
+
+
+  updateCurrentWord = (newWord) => {
+    this.setState({
+      currentWord: newWord
+    })
+  }
+
+  updateCurrentDisplayedWord = (newWord) => {
+    this.setState({
+      currentDisplayedWord: newWord
+    })
+  }
+
+  handleClick = () => {
+    this.setState({
+      clicked: true,
+      errors: 7,
+      over: true,
+    });
+  }
+
+  handleWrong = (type) => {
+    this.setState({
+      errors: type === 'add' ? this.state.errors + 1 : this.state.errors,
+    });
+
+
+  }
+
+getTitle = () => {
+  if(this.state.errors < 7) {
+    return ('')
+  } else if (this.state.errors === 7){
+    return ('You lost. Try again?')
+  } else {
+    return ('')
+  }
+}
+
   mapThroughLetters = (letter) => {
     return (
       <div className="letters"><div className="letterButtons">{letter}</div></div>
@@ -107,17 +121,23 @@ export class Category extends Component {
     return (
       <div style={{textAlign: "center"}}>
         <AppHeader />
-        <h1>{this.props.name}</h1>
-        <Win currentWord={this.state.currentWord}/>
+        <h1>{ this.props.name }</h1>
         <Images errors={this.state.errors} />
         <div className="letterbox">
-        {letterList.map(this.mapThroughLetters)}
-      </div>
-      <div>
-        <h1 id="line" style={{whiteSpace: "pre", fontSize: 80}}>{this.state.currentDisplayedWord}</h1>
-      </div>
-      <button onClick={this.handleClick}>Solution</button>
-      <h1>{this.state.clicked ? this.props.wordList[this.randindex] : null}</h1>
+          {letterList.map(this.mapThroughLetters)}
+        </div>
+        <div>
+          <h1 id="line" style={{whiteSpace: "pre", fontSize: 80}}>{this.state.currentDisplayedWord}</h1>
+        </div>
+        <button onClick={this.handleClick}>Solution</button>
+        <button
+          onClick={this.newGame}
+        >
+          New Game
+        </button>
+        <h1>{this.state.clicked ? this.state.currentWord : null}</h1>
+        <h1 style={{fontSize:100}}>{ this.state.errors === 7 ? 'You lost. Try again?' : null }</h1>
+        <Win currentWord={this.state.currentDisplayedWord} />
       </div>
     );
   }
