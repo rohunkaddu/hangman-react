@@ -55,6 +55,7 @@ body {
   font-size: 200px;
 }
 
-.img1 {
-  margin-left: 50%;
+#logout {
+  padding-left: 90%;
+  padding-top: 1%;
 }
