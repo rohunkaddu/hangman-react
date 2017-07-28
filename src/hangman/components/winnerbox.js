@@ -19,10 +19,8 @@ export class Win extends Component {
   render() {
     return (
       <div>
-        {this.WinLogic()}
+        {this.WinLogic}
       </div>
     );
   }
 }
-
-export default Win;

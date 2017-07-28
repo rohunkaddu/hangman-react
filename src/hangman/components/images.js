@@ -18,7 +18,7 @@ export class Images extends Component {
   render() {
     return (
       <div>
-        <img src= { this.hangers[this.props.errors] } className='gallows' alt="gallows"/>
+        <img src= { this.hangers[this.props.errors] } className='gallows' alt="hi"/>
       </div>
     );
   }

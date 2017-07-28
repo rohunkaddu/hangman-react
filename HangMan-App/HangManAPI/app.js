@@ -35,7 +35,7 @@ app.use(cookieParser())
 app.use(session({ secret: 'mysecretsessionkey' }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(express.static(' public'))
+app.use(express.static('public'))
 
 const User = require('./models/user')
 passport.use(new LocalStrategy(User.authenticate()))
